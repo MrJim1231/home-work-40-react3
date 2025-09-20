@@ -1,5 +1,6 @@
 import ControlledForm from "./components/ControlledForm";
 import UncontrolledForm from "./components/UncontrolledForm";
+import StatefulUsers from "./components/StatefulUsers";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <UncontrolledForm />
         </div>
       </div>
+      <StatefulUsers />
     </div>
   );
 }
