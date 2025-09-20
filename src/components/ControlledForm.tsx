@@ -1,14 +1,23 @@
 import { useState } from "react";
 
+// Интерфейс пользователя
+export interface UserInterface {
+  id: number;
+  fullName: string;
+  birthDate: string;
+  phone: string;
+  email: string;
+}
+
 const ControlledForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Omit<UserInterface, "id">>({
     fullName: "",
     birthDate: "",
     phone: "",
     email: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -16,9 +25,18 @@ const ControlledForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Добавлен пользователь:", formData);
+
+    // Создаём нового пользователя с уникальным id
+    const newUser: UserInterface = {
+      id: Date.now(),
+      ...formData,
+    };
+
+    console.log("Добавлен пользователь:", newUser);
+
+    // Очистим форму
     setFormData({
       fullName: "",
       birthDate: "",
