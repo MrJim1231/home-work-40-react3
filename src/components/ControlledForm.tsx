@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { UserInterface } from "../types/User.interface";
+import type { FormInterface } from "../types/Form.interface";
 
 const ControlledForm = () => {
-  const [formData, setFormData] = useState<Omit<UserInterface, "id">>({
+  const [formData, setFormData] = useState<Omit<FormInterface, "id">>({
     fullName: "",
     birthDate: "",
     phone: "",
@@ -13,8 +13,13 @@ const ControlledForm = () => {
     const { name, value } = e.target;
 
     if (name === "phone") {
-      // Оставляем только цифры и плюс
-      const filtered = value.replace(/[^\d+]/g, "");
+      let filtered = value.replace(/[^\d+]/g, ""); // оставляем только цифры и плюс
+
+      // автоматически добавляем + в начале, если его нет
+      if (filtered && !filtered.startsWith("+")) {
+        filtered = "+" + filtered;
+      }
+
       setFormData((prev) => ({
         ...prev,
         [name]: filtered,
@@ -37,7 +42,7 @@ const ControlledForm = () => {
       return;
     }
 
-    const newUser: UserInterface = {
+    const newUser: FormInterface = {
       id: Date.now(),
       ...formData,
     };

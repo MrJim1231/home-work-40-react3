@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import type { UserInterface } from "../types/User.interface";
+import type { FormInterface } from "../types/Form.interface";
 
 const UncontrolledForm = () => {
   const fullNameRef = useRef<HTMLInputElement>(null);
@@ -19,7 +19,7 @@ const UncontrolledForm = () => {
       return;
     }
 
-    const newUser: UserInterface = {
+    const newUser: FormInterface = {
       id: Date.now(),
       fullName: fullNameRef.current?.value || "",
       birthDate: birthDateRef.current?.value || "",
@@ -39,10 +39,19 @@ const UncontrolledForm = () => {
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!phoneRef.current) return;
+
+    let value = e.target.value;
+
     // Оставляем только цифры и плюс
-    if (phoneRef.current) {
-      phoneRef.current.value = e.target.value.replace(/[^\d+]/g, "");
+    value = value.replace(/[^\d+]/g, "");
+
+    // Автоматически добавляем + в начале
+    if (value && !value.startsWith("+")) {
+      value = "+" + value;
     }
+
+    phoneRef.current.value = value;
   };
 
   return (

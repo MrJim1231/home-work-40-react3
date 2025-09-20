@@ -1,5 +1,5 @@
 // Интерфейс пользователя
-export interface UserInterface {
+export interface FormInterface {
   id: number;
   fullName: string;
   birthDate: string;
