@@ -1,13 +1,5 @@
 import { useState } from "react";
-
-// Интерфейс пользователя
-export interface UserInterface {
-  id: number;
-  fullName: string;
-  birthDate: string;
-  phone: string;
-  email: string;
-}
+import type { UserInterface } from "../types/User.interface";
 
 const ControlledForm = () => {
   const [formData, setFormData] = useState<Omit<UserInterface, "id">>({

@@ -1,13 +1,5 @@
 import { useRef } from "react";
-
-// Интерфейс пользователя
-export interface UserInterface {
-  id: number;
-  fullName: string;
-  birthDate: string;
-  phone: string;
-  email: string;
-}
+import type { UserInterface } from "../types/User.interface";
 
 const UncontrolledForm = () => {
   const fullNameRef = useRef<HTMLInputElement>(null);
