@@ -29,9 +29,11 @@ const StatefulUsers = () => {
   if (error) return <p className="text-center text-danger">{error}</p>;
 
   return (
-    <div className="container py-5">
-      <h1 className="text-center mb-4 text-primary">Users list</h1>
-      <StatelessUsers users={users} />
+    <div className="container py-5 ">
+      <div className="card shadow p-4">
+        <h1 className="text-center mb-4 text-primary">Users list</h1>
+        <StatelessUsers users={users} />
+      </div>
     </div>
   );
 };

@@ -4,16 +4,23 @@ import StatefulUsers from "./components/StatefulUsers";
 
 function App() {
   return (
-    <div className="container-fluid">
-      <div className="row vh-100">
-        <div className="col-6 d-flex align-items-center justify-content-center">
+    <div className="container-fluid vh-100">
+      <div className="row h-100">
+        {/* Controlled Form */}
+        <div className="col-4 d-flex align-items-start justify-content-center p-3">
           <ControlledForm />
         </div>
-        <div className="col-6 d-flex align-items-center justify-content-center">
+
+        {/* Uncontrolled Form */}
+        <div className="col-4 d-flex align-items-start justify-content-center p-3">
           <UncontrolledForm />
         </div>
+
+        {/* Users List */}
+        <div className="col-4 d-flex align-items-start justify-content-center p-3 overflow-auto">
+          <StatefulUsers />
+        </div>
       </div>
-      <StatefulUsers />
     </div>
   );
 }
