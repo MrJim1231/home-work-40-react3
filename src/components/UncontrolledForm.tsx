@@ -18,7 +18,10 @@ const UncontrolledForm = () => {
       email: emailRef.current?.value || "",
     };
 
-    console.log("Добавлен пользователь:", newUser);
+    // console.log("Добавлен пользователь:", newUser);
+    alert(
+      `Добавлен пользователь:\n\nФИО: ${newUser.fullName}\nДата рождения: ${newUser.birthDate}\nТелефон: ${newUser.phone}\nEmail: ${newUser.email}`
+    );
 
     // Очистка полей
     if (fullNameRef.current) fullNameRef.current.value = "";

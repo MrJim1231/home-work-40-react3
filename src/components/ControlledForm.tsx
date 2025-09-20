@@ -25,7 +25,10 @@ const ControlledForm = () => {
       ...formData,
     };
 
-    console.log("Добавлен пользователь:", newUser);
+    // console.log("Добавлен пользователь:", newUser);
+    alert(
+      `Добавлен пользователь:\n\nФИО: ${newUser.fullName}\nДата рождения: ${newUser.birthDate}\nТелефон: ${newUser.phone}\nEmail: ${newUser.email}`
+    );
 
     setFormData({
       fullName: "",
