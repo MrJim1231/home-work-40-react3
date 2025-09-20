@@ -30,7 +30,7 @@ const ControlledForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2>Добавить пользователя</h2>
+        <h2>Контролируемая форма</h2>
 
         <div>
           <label htmlFor="fullName">ФИО</label>
