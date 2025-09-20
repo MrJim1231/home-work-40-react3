@@ -10,15 +10,23 @@ const UncontrolledForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const phoneValue = phoneRef.current?.value || "";
+
+    // Проверка: номер должен начинаться с + и быть не короче 10 цифр
+    const phonePattern = /^\+\d{10,}$/;
+    if (!phonePattern.test(phoneValue)) {
+      alert("Введите номер телефона в формате +38XXXXXXXXXX");
+      return;
+    }
+
     const newUser: UserInterface = {
       id: Date.now(),
       fullName: fullNameRef.current?.value || "",
       birthDate: birthDateRef.current?.value || "",
-      phone: phoneRef.current?.value || "",
+      phone: phoneValue,
       email: emailRef.current?.value || "",
     };
 
-    // console.log("Добавлен пользователь:", newUser);
     alert(
       `Добавлен пользователь:\n\nФИО: ${newUser.fullName}\nДата рождения: ${newUser.birthDate}\nТелефон: ${newUser.phone}\nEmail: ${newUser.email}`
     );
@@ -28,6 +36,13 @@ const UncontrolledForm = () => {
     if (birthDateRef.current) birthDateRef.current.value = "";
     if (phoneRef.current) phoneRef.current.value = "";
     if (emailRef.current) emailRef.current.value = "";
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Оставляем только цифры и плюс
+    if (phoneRef.current) {
+      phoneRef.current.value = e.target.value.replace(/[^\d+]/g, "");
+    }
   };
 
   return (
@@ -75,9 +90,9 @@ const UncontrolledForm = () => {
               name="phone"
               ref={phoneRef}
               className="form-control"
-              placeholder="+38 (___) ___-__-__"
+              placeholder="+38XXXXXXXXXX"
               required
-              pattern="^\+?[0-9\s\-\(\)]{7,20}$"
+              onChange={handlePhoneChange}
             />
           </div>
 

@@ -11,21 +11,37 @@ const ControlledForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+    if (name === "phone") {
+      // Оставляем только цифры и плюс
+      const filtered = value.replace(/[^\d+]/g, "");
+      setFormData((prev) => ({
+        ...prev,
+        [name]: filtered,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Проверка: номер должен начинаться с + и быть не короче 10 цифр
+    const phonePattern = /^\+\d{10,}$/;
+    if (!phonePattern.test(formData.phone)) {
+      alert("Введите номер телефона в формате +38XXXXXXXXXX");
+      return;
+    }
 
     const newUser: UserInterface = {
       id: Date.now(),
       ...formData,
     };
 
-    // console.log("Добавлен пользователь:", newUser);
     alert(
       `Добавлен пользователь:\n\nФИО: ${newUser.fullName}\nДата рождения: ${newUser.birthDate}\nТелефон: ${newUser.phone}\nEmail: ${newUser.email}`
     );
@@ -86,9 +102,8 @@ const ControlledForm = () => {
               className="form-control"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="+38 (___) ___-__-__"
+              placeholder="+38XXXXXXXXXX"
               required
-              pattern="^\+?[0-9\s\-\(\)]{7,20}$"
             />
           </div>
 
