@@ -20,7 +20,7 @@ const UncontrolledForm = () => {
 
     console.log("Добавлен пользователь:", newUser);
 
-    // Очистка полей формы
+    // Очистка полей
     if (fullNameRef.current) fullNameRef.current.value = "";
     if (birthDateRef.current) birthDateRef.current.value = "";
     if (phoneRef.current) phoneRef.current.value = "";
@@ -28,59 +28,77 @@ const UncontrolledForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Неконтролируемая форма</h2>
+    <div className="container mt-5">
+      <div className="card shadow p-4">
+        <h2 className="mb-4 text-center">Не контролируемая форма</h2>
 
-      <div>
-        <label htmlFor="fullName">ФИО</label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          ref={fullNameRef}
-          placeholder="Введите ФИО"
-          required
-        />
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="fullName" className="form-label">
+              ФИО
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              ref={fullNameRef}
+              className="form-control"
+              placeholder="Введите ФИО"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="birthDate" className="form-label">
+              Дата рождения
+            </label>
+            <input
+              type="date"
+              id="birthDate"
+              name="birthDate"
+              ref={birthDateRef}
+              className="form-control"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label">
+              Номер телефона
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              ref={phoneRef}
+              className="form-control"
+              placeholder="+38 (___) ___-__-__"
+              required
+              pattern="^\+?[0-9\s\-\(\)]{7,20}$"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              E-mail
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              ref={emailRef}
+              className="form-control"
+              placeholder="Введите email"
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-success w-100">
+            Сохранить
+          </button>
+        </form>
       </div>
-
-      <div>
-        <label htmlFor="birthDate">Дата рождения</label>
-        <input
-          type="date"
-          id="birthDate"
-          name="birthDate"
-          ref={birthDateRef}
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="phone">Номер телефона</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          ref={phoneRef}
-          placeholder="+38 (___) ___-__-__"
-          required
-          pattern="^\+?[0-9\s\-\(\)]{7,20}$"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="email">E-mail</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          ref={emailRef}
-          placeholder="Введите email"
-          required
-        />
-      </div>
-
-      <button type="submit">Сохранить</button>
-    </form>
+    </div>
   );
 };
 
